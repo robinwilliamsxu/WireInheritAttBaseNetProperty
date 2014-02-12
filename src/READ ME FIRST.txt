@@ -1,0 +1,26 @@
+Copyright 2013 Mentor Graphics Corporation. All Rights Reserved.
+
+Recipients who obtain this code directly from Mentor Graphics use it solely for internal purposes to serve as example Java or JavaScript plugins. This code may not be used in a commercial distribution. Recipients may duplicate the code provided that all notices are fully reproduced with and remain in the code. No part of this code may be modified, reproduced, translated, used, distributed, disclosed or provided to third parties without the prior written consent of Mentor Graphics, except as expressly authorized above.
+
+THE CODE IS MADE AVAILABLE "AS IS" WITHOUT WARRANTY OR SUPPORT OF ANY KIND. MENTOR GRAPHICS OFFERS NO EXPRESS OR IMPLIED WARRANTIES AND SPECIFICALLY DISCLAIMS ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR WARRANTY OF NON-INFRINGEMENT. IN NO EVENT SHALL MENTOR GRAPHICS OR ITS LICENSORS BE LIABLE FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR SAVINGS) WHETHER BASED ON CONTRACT, TORT OR ANY OTHER LEGAL THEORY, EVEN IF MENTOR GRAPHICS OR ITS LICENSORS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+-----------------------------------------------------------------------------------------
+
+Integrator constraints that assigns wire attributes based on logical device pin properties
+
+The value can be determined from three places in priority order:
+   1. From a property on the slot connector cavity in Integrator
+   2. From a property on the device pin in the logical system design
+   3. From an attribute on the net in the logical system design
+For wires not connected to a slot connector (or with no cavity or pin property defined),
+the value will come from the functional net which is the same as the usually implemented behaviour.
+
+Two example implementations are provided for the attributes: WireCSA and WireSpec.
+The enclosed Java source makes it easy to add additional constraints to control WireMaterial or WireColor.
+The main requirement is a method to determine the result of value clashes.
+The example WireCSA constraint returns the largest numerical value.
+The example WireSpec constraint returns the first lexicographically sorted value.
+These could be modified according to some other scheme as required.
+  
+Place the jar file in <installation_folder>/plugins (or a sub-folder).
+Assign as custom constraint on Integrator plane.
