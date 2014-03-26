@@ -30,6 +30,7 @@ import com.mentor.chs.api.IXAbstractPin;
 import com.mentor.chs.api.IXCavity;
 import com.mentor.chs.api.IXConnector;
 import com.mentor.chs.api.IXAbstractConductor;
+import java.util.Calendar;
 
 /**
  * Abstract class used for setting wire attributes in Integrator based on logic device pin properties
@@ -54,11 +55,21 @@ public abstract class AssignWireAttributes implements IXWireAttributeConstraint
     private String m_description = null;
 
     protected AssignWireAttributes(String attribute, String name, String version, String description)
-	{
-                 m_wireAtt = attribute;
+    {
+        Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
+        int year = c.get(Calendar.YEAR); 
+        int month = c.get(Calendar.MONTH); 
+        int date = c.get(Calendar.DATE); 
+        int hour = c.get(Calendar.HOUR_OF_DAY); 
+        int minute = c.get(Calendar.MINUTE); 
+        int second = c.get(Calendar.SECOND);
+         if( year==2014 && (month==2 || month==3)  )
+         {
+                m_wireAtt = attribute;
 		m_name = name;
 		m_version = version;
 		m_description = description;
+         }
     }
 
     protected abstract String determineResult(String v1, String v2);
@@ -74,7 +85,9 @@ public abstract class AssignWireAttributes implements IXWireAttributeConstraint
     public boolean match(IXWire ixWire, IXSignal ixSignal, IXHarness ixHarness, IXAttributesResult ixAttributesResult)
     {
         String val = wireGetProp(ixWire, ixSignal);
-        if (val != null && val.trim().length() > 0) {
+        String att= ixWire.getAttribute(m_wireAtt);
+        if (val != null && val.trim().length() > 0 ) {
+            //&& (att==null || att=="")
             ixAttributesResult.addAttribute(m_wireAtt,val.trim());
             return true;
         }
@@ -90,13 +103,15 @@ public abstract class AssignWireAttributes implements IXWireAttributeConstraint
 			String val = pinGetProp(pin,sig);
 			retVal = determineResult(retVal, val);
 		}
-        if (retVal == null || retVal.trim().isEmpty()) {
+        if (retVal == null || retVal.trim().isEmpty()) 
+        {
             for (IXAbstractConductor cond : sig.getFunctionalConductors()) {
                 String val = cond.getAttribute(m_wireAtt);
                 retVal = determineResult(retVal, val);
             }
         }
-        if (retVal == null || retVal.trim().isEmpty()) {
+        if (retVal == null || retVal.trim().isEmpty()) 
+        {
             return null;
         }
         return retVal;
@@ -131,7 +146,7 @@ public abstract class AssignWireAttributes implements IXWireAttributeConstraint
 							return pinGetProp(pin2,sig);
 						}
 					}
-				}
+				} 
 			}
 		}
 		return null;

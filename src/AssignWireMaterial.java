@@ -48,7 +48,7 @@ public class AssignWireMaterial extends AssignWireAttributes
 {
     public AssignWireMaterial()
     {
-        super("WireMaterial","Set WireMaterial from device pins","0.1","Set WireMaterial from logical pin attributes");
+        super("WireMaterial","Set WireMaterial from device pins","0.2","Set WireMaterial from logical pin attributes");
         setPinProperty("WireMaterial");
         setCavityProperty("WireMaterial");
     }

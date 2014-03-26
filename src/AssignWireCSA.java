@@ -35,7 +35,7 @@ public class AssignWireCSA extends AssignWireAttributes
 {
     public AssignWireCSA()
     {
-        super("WireCSA","Set WireCSA from device pins","0.1","Set Wire CSA from logical pin attributes");
+        super("WireCSA","Set WireCSA from device pins","0.2","Set Wire CSA from logical pin attributes");
         setPinProperty("WireCSA");
         setCavityProperty("WireCSA");
     }

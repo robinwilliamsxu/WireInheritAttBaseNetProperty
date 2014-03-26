@@ -12,7 +12,7 @@ public class AssignWireColor extends AssignWireAttributes
 {
     public AssignWireColor()
     {
-        super("WireColor","Set WireColor from device pins","0.1","Set Wire Color from logical pin attributes");
+        super("WireColor","Set WireColor from device pins","0.2","Set Wire Color from logical pin attributes");
         setPinProperty("WireColor");
         setCavityProperty("WireColor");
     }

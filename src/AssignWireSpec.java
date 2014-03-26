@@ -1,3 +1,7 @@
+
+import com.mentor.chs.plugin.IXOutputWindow;
+import java.util.Calendar;
+
 /**
  * Copyright 2013 Mentor Graphics Corporation. All Rights Reserved.
  * <p>
@@ -35,9 +39,13 @@ public class AssignWireSpec extends AssignWireAttributes
 {
     public AssignWireSpec()
     {
-        super("WireSpec","Set WireSpec from device pins","0.1","Set Wire Specification from logical pin attributes");
-        setPinProperty("WireSpec");
-        setCavityProperty("WireSpec");
+        
+        super("WireSpec","Set WireSpec from device pins","0.2","Set Wire Specification from logical pin attributes");
+        
+        
+             setPinProperty("WireSpec");
+             setCavityProperty("WireSpec");
+     
     }
 
     /* This method overrides the abstract method in the base class
@@ -45,13 +53,20 @@ public class AssignWireSpec extends AssignWireAttributes
      *
      * This EXAMPLE implementation simply returns first lexicographically sorted value
      */
+    
     protected String determineResult(String v1, String v2)
     {
         if (v1 == null) { return v2; }
         if (v2 == null) { return v1; }
 
-        if (v1.compareTo(v2) < 0) {
-            return v1;
+        GetFloatValue m=new GetFloatValue();
+        if ((v1 != null && v1.trim().length() > 0) &&((v2 != null && v2.trim().length() > 0)))
+        {
+           if ( m.getvalue(v1)>m.getvalue(v2)) 
+            {
+                return v1;
+            }
+            return v2;
         }
         return v2;
     }
